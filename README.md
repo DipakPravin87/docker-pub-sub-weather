@@ -101,3 +101,14 @@ docker restart weather-publisher
    1. Database batch insert code
    2. Kafka consumer code 
    3. Kafka producer code
+
+### Frequent errors
+1. `mvn clean package docker:build` failures
+   1. This fails because spotify maven plugin APIs are offline
+```Caused by: com.spotify.docker.client.exceptions.DockerException: com.spotify.docker.client.shaded.com.fasterxml.jackson.databind.exc.MismatchedInputException: No content to map due to end-of-input
+ at [Source: (String)""; line: 1, column: 0]
+ ```
+   2. Problem while connecting to local docker engine . Fix `DOCKER_HOST=unix:///var/run/docker.sock mvn clean package docker:build -DskipTests`
+```shell
+[ERROR] Failed to execute goal com.spotify:docker-maven-plugin:1.2.0:build (default-cli) on project weather-publisher: Exception caught: java.util.concurrent.ExecutionException: com.spotify.docker.client.shaded.javax.ws.rs.ProcessingException: com.spotify.docker.client.shaded.org.apache.http.conn.HttpHostConnectException: Connect to localhost:2375 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused (Connection refused)
+```

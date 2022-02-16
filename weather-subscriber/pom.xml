@@ -12,6 +12,7 @@
 
     <artifactId>weather-subscriber</artifactId>
     <name>weather-subscriber</name>
+    <version>1.0</version>
     <description>Consumes data from Weather kafka topic</description>
 
     <properties>
